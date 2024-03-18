@@ -62,7 +62,7 @@ namespace :nginx do
   task :setup_dh_params do
     next unless fetch(:nginx_use_ssl)
     on roles :web do
-      next if file_exists?(nginx_dh_params_file) && file_exists?(nginx_dh_params_file)
+      next if file_exist?(nginx_dh_params_file) && file_exist?(nginx_dh_params_file)
       sudo :mkdir, '-p', File.dirname(nginx_dh_params_file)
       sudo :openssl, 'dhparam -out', nginx_dh_params_file, '2048'
     end
@@ -72,7 +72,7 @@ namespace :nginx do
   task :setup_ssl do
     next unless fetch(:nginx_use_ssl)
     on roles :web do
-      next if file_exists?(nginx_ssl_cert_file) && file_exists?(nginx_ssl_cert_key_file)
+      next if file_exist?(nginx_ssl_cert_file) && file_exist?(nginx_ssl_cert_key_file)
       if fetch(:nginx_upload_local_cert)
         sudo_upload! fetch(:nginx_ssl_cert_local_path), nginx_ssl_cert_file
         sudo_upload! fetch(:nginx_ssl_cert_key_local_path), nginx_ssl_cert_key_file

@@ -13,7 +13,7 @@ module Capistrano
       def template_to_s(template_name, locals = {})
         config_file = "#{fetch(:templates_path)}/#{template_name}"
         # if no customized file, proceed with default
-        unless File.exists?(config_file)
+        unless File.exist?(config_file)
           config_file = File.join(File.dirname(__FILE__), "../../generators/capistrano/unicorn_nginx/templates/#{template_name}")
         end
 
@@ -25,7 +25,7 @@ module Capistrano
         StringIO.new(template_to_s(template_name, locals))
       end
 
-      def file_exists?(path)
+      def file_exist?(path)
         test "[ -e #{path} ]"
       end
 
